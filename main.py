@@ -100,7 +100,7 @@ class Bank:
             
         userdata =  [ i for i in Bank.data if i['Account'] == accNumber  and i['Pin'] == pin ]
        
-        if userdata == False:
+        if not userdata:
             print("Sorry , No data found ")
         else:
             print("YOUR INFORMATION : ")
@@ -113,7 +113,7 @@ class Bank:
                     
         userdata =  [ i for i in Bank.data if i['Account'] == accNumber  and i['Pin'] == pin ]
                
-        if userdata == False:
+        if not userdata:
             print("Sorry , No user data found ")
         else:
             print("You can not change the AGE , ACCOUNT NUMBER , BALANCE")
@@ -146,7 +146,24 @@ class Bank:
             Bank.__update()
             print("Bank details updated successfully")
 
+    def Delete(self):
+        accNumber = input("please tell your Account Number ")
+        pin = input("please tell your pin Number ")
+                    
+        userdata =  [ i for i in Bank.data if i['Account'] == accNumber  and i['Pin'] == pin ]
+               
+        if not userdata:
+              print("No data")
+        else:
+            check = input("Enter y if you actually want to delete the account or press n :- ")
 
+            if check == 'N' or check == 'n':
+                print("passed")
+            else:
+                index = Bank.data.index(userdata[0])    
+                Bank.data.pop(index)
+                Bank.__update()
+                print("Your Bank account deleted successfully")      
 
 
 user = Bank()    
@@ -169,3 +186,5 @@ if check == 4:
     user.Show_Details()  
 if check == 5:
     user.Update_Details()           
+if check == 6:
+    user.Delete()     
